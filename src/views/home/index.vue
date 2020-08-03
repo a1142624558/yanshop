@@ -33,31 +33,9 @@
         <span>全民砍价</span>
         <van-icon name="arrow" />
       </div>
-      <div class="cut-list">
-        <div class="cut-item" v-for="(item,index) in cutList" :key="index">
-          <div>
-            <img :src="item.pic" />
-          </div>
-          <div>
-            <p v-html="item.name"></p>
-            <p v-html="item.characteristic"></p>
-            <div class="cut-price">
-              <div>
-                <p>￥{{ item.minPrice }}</p>
-                <p>低价</p>
-              </div>
-              <div>
-                <p>￥{{item.originalPrice}}</p>
-                <p>原价</p>
-              </div>
-              <div>
-                <p>{{item.stores}}</p>
-                <p>库存</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- 组件通信父传子 -->
+      <Cut :cutList="cutList"/>
+      
     </div>
     <!-- 精选专题区域 -->
     <div class="article">
@@ -81,19 +59,14 @@
         <span>人气推荐</span>
         <van-icon name="arrow" />
       </div>
-      <div class="goods-list">
-        <div class="goods-item" v-for="(item,index) in goodsList" :key="index">
-          <img :src="item.pic" />
-          <p v-html="item.name"></p>
-          <p item.characteristic></p>
-          <p>￥{{item.originalPrice}}</p>
-        </div>
-      </div>
+      <Recomman :goodsList="goodsList"/>
     </div>
   </div>
 </template>
 
 <script>
+import Cut from "@/components/home/cut.vue";//组件拆分 导入砍价的组件
+import Recomman from "@/components/home/recommand.vue";
 export default {
   name: "",
   mounted() {
@@ -110,7 +83,10 @@ export default {
       goodsList: [],
     };
   },
-  components: {},
+  components: {
+    Cut,
+    Recomman,
+  },
   methods: {
     // 获取banner图的信息
     geiBanners() {
@@ -203,58 +179,7 @@ export default {
       background: #f3f3f3;
       border: 1px solid #ddd;
     }
-    .cut-list {
-      width: 100%;
-      .cut-item {
-        width: 100%;
-        display: flex;
-        padding: 0.1rem;
-        box-sizing: border-box;
-        padding-bottom: 0.15rem;
-        border-bottom: 1px solid #000;
-        div:nth-of-type(1) {
-          width: 30%;
-          img {
-            width: 100%;
-            border-radius: 0.1rem;
-          }
-        }
-        div:nth-of-type(2) {
-          width: 65%;
-          margin-left: 5%;
-          p:nth-of-type(1) {
-            font-size: 0.3rem;
-            line-height: 0.65rem;
-          }
-          p:nth-of-type(2) {
-            font-size: 0.25rem;
-            line-height: 0.65rem;
-            color: #505050;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            word-break: break-all;
-          }
-          .cut-price {
-            width: 100%;
-            display: flex;
-            div {
-              width: 33%;
-              text-align: center;
-              margin-top: 0.3rem;
-              p:nth-of-type(1) {
-                font-size: 0.3rem;
-                color: #505050;
-              }
-
-              p:nth-of-type(2) {
-                font-size: 0.3rem;
-              }
-            }
-          }
-        }
-      }
-    }
+    
   }
   // 精选专题
   .article {
@@ -320,38 +245,7 @@ export default {
       background: #f3f3f3;
       border: 1px solid #ddd;
     }
-    .goods-list {
-      width: 100%;
-      box-sizing: border-box;
-      display: flex;
-      flex-wrap: wrap;
-      .goods-item {
-        width: 46%;
-        line-height: 0.5rem;
-        padding: 0.1rem;
-        img {
-          width: 100%;
-          border-radius: 0.1rem;
-        }
-        p {
-          white-space: nowrap;
-          text-overflow: ellipsis;
-          overflow: hidden;
-          word-break: break-all;
-        }
-        p:nth-of-type(1) {
-          font-size: 0.3rem;
-        }
-        p:nth-of-type(2) {
-          font-size: 0.2rem;
-          color: #b2b2b2;
-        }
-        p:nth-of-type(3) {
-          font-size: 0.25rem;
-          color: #ff0000;
-        }
-      }
-    }
+    
   }
 }
 </style>

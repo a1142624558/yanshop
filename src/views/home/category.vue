@@ -1,13 +1,13 @@
 <template>
   <div class="box">
       <!-- 头部的搜索框 -->
-      <van-search placeholder="请输入商品的名字"/>
+      <van-search placeholder="请输入商品的名字" @focus="$router.push('/goods/search')" />
 
       <div>
         <van-tree-select :items="category" :main-active-index.sync="active" class="tree">
           <template #content>
             <div id="sub_cate">
-              <div class="item" v-for="(item,index) in getCate" :key="index">
+              <div class="item" v-for="(item,index) in getCate" :key="index" @click="gotoCate(item.id)">
                 <img :src="item.icon" />
                 <p>{{item.name}}</p>
               </div>
@@ -69,6 +69,9 @@ export default {
         this.subCategory = res.data;
       })
     },
+    gotoCate(cid){
+      this.$router.push("/goods/cate/"+cid)
+    }
   },
 };
 </script>
