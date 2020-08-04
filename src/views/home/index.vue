@@ -125,7 +125,6 @@ export default {
       this.$axios({
         url:"https://api.it120.cc/small4/shop/goods/list"
       }).then(res=>{
-        console.log(res.data);
         let data = res.data.filter(item=>{
           return item.name.indexOf("测试")== -1;
         }) 

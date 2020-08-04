@@ -6,6 +6,8 @@ import Me from "@/views/home/me.vue";
 
 import goodsCate from "@/views/goods/cate.vue";
 import goodsSearch from "@/views/goods/search.vue";
+import goodsDetail from "@/views/goods/detail.vue";
+import Login from "@/views/login/login";
 
 export default[{
     path:"/",
@@ -56,12 +58,29 @@ export default[{
         title:"分类列表"
     }
 },
+
 {
     path:"/goods/search",
     name:"goods_search",
     component:goodsSearch,
     meta:{
         title:"商品搜索页面"
+    }
+},
+{
+    path:"/goods/detail/:id",
+    name:"goods_detail",
+    component:goodsDetail,
+    meta:{
+        title:"商品详情"
+    }
+},
+{
+    path:"/login",
+    name:"login",
+    component:Login,
+    meta:{
+        title:"用户登录"
     }
 },
 ]
