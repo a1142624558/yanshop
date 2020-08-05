@@ -7,6 +7,8 @@ import Me from "@/views/home/me.vue";
 import goodsCate from "@/views/goods/cate.vue";
 import goodsSearch from "@/views/goods/search.vue";
 import goodsDetail from "@/views/goods/detail.vue";
+import Article from "@/views/article/article.vue";
+import ArticleDetail from "@/views/article/detail.vue";
 import Login from "@/views/login/login";
 
 export default[{
@@ -83,4 +85,21 @@ export default[{
         title:"用户登录"
     }
 },
+{
+    path:"/article",
+    name:"article",
+    component:Article,
+    meta:{
+        title:"精选专题"
+    }
+},
+{
+    path:"/article/detail/:id",
+    name:"article_detail",
+    component:ArticleDetail,
+    meta:{
+        title:"专题文章详情"
+    }
+},
+
 ]

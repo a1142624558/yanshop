@@ -20,7 +20,7 @@
           <van-icon name="coupon" size="35" />
           <p>砍价</p>
         </div>
-        <div class="icon-items">
+        <div class="icon-items" @click="$router.push('/article')">
           <van-icon name="cluster" size="35" />
           <p>专栏</p>
         </div>
@@ -39,13 +39,13 @@
     </div>
     <!-- 精选专题区域 -->
     <div class="article">
-      <div class="article-head">
+      <div class="article-head" @click="$router.push('/article')">
         <span>精选专题</span>
         <van-icon name="arrow" />
       </div>
       <div class="article-list">
         <ul>
-          <li v-for="(item,index) in articleist" :key="index">
+          <li v-for="(item,index) in articleist" :key="index" @click="$router.push('/article/detail/'+item.id)">
             <img :src="item.pic" />
             <p v-html="item.title"></p>
             <p v-html="item.descript"></p>

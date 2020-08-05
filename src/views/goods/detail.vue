@@ -36,8 +36,12 @@
       <van-goods-action-button type="warning" text="加入购物车" @click="skuShow=!skuShow" />
     </van-goods-action>
 
-    <van-sku v-model="skuShow" :sku="sku" :goods="goods" @add-cart="addCart"/>
+    <van-sku v-model="skuShow" :sku="sku" :goods="goods" @add-cart="addCart" />
+    <!-- 返回按钮 -->
+    <div id="back" @click="$router.go(-1)">
+      <van-icon name="arrow-left" size="25"></van-icon>
 
+    </div>
   </div>
 </template>
 
@@ -79,48 +83,48 @@ export default {
           },
         ],
         list: [
-            {
-                id:1,
-                c1:1,
-                s1:8,
-                price: 100,
-                stock_num:100,
-            },
-            {
-                id:1,
-                c1:1,
-                s1:9,
-                price: 100,
-                stock_num:100,
-            },
-            {
-                id:1,
-                c1:2,
-                s1:8,
-                price: 100,
-                stock_num:100,
-            },
-            {
-                id:1,
-                c1:2,
-                s1:9,
-                price: 100,
-                stock_num:100,
-            },
-            {
-                id:1,
-                c1:3,
-                s1:8,
-                price: 100,
-                stock_num:100,
-            },
-            {
-                id:1,
-                c1:3,
-                s1:9,
-                price: 100,
-                stock_num:100,
-            }
+          {
+            id: 1,
+            c1: 1,
+            s1: 8,
+            price: 100,
+            stock_num: 100,
+          },
+          {
+            id: 1,
+            c1: 1,
+            s1: 9,
+            price: 100,
+            stock_num: 100,
+          },
+          {
+            id: 1,
+            c1: 2,
+            s1: 8,
+            price: 100,
+            stock_num: 100,
+          },
+          {
+            id: 1,
+            c1: 2,
+            s1: 9,
+            price: 100,
+            stock_num: 100,
+          },
+          {
+            id: 1,
+            c1: 3,
+            s1: 8,
+            price: 100,
+            stock_num: 100,
+          },
+          {
+            id: 1,
+            c1: 3,
+            s1: 9,
+            price: 100,
+            stock_num: 100,
+          },
         ],
         price: "1.00", // 默认价格（单位元）
         stock_num: 227, // 商品总库存
@@ -150,18 +154,45 @@ export default {
       });
     },
     // 加入购物车
-    addCart(){
-    // 判断用户是否登录
+    addCart() {
+      // 判断用户是否登录
 
-        let data = localStorage.getItem("09C");
+      let data = localStorage.getItem("09C");
 
-        if(data == null){
-            this.$toast.fail("请先登录您的账户");
-            this.$router.push("/login")
-            return false;
-        }
-        this.$toast.success("加入购物车成功");
-    }
+      if (data == null) {
+        this.$toast.fail("请先登录您的账户");
+        this.$router.push("/login");
+        return false;
+      }
+      // 加入购物车的操作
+      let cartList = this.$store.state.cartList;
+      let index = cartList.findIndex(item=>{
+        return item.id == this.gid;
+      });
+      if (index > -1) {
+        // 购物车中存在当前商品
+        cartList.map((item) => {
+          item.nums++;
+        });
+      } else {
+        // 购物车中不存在当前商品
+        // 实例化购物车的对象信息
+        let object = new Object();
+        object.id = this.gid;
+        object.name = this.goodsInfo.name;
+        object.price = this.goodsInfo.originalPrice;
+        object.img = this.goods.picture;
+        object.nume = 1;
+        object.checked = true;
+        cartList.push(object)
+      }
+
+      this.$store.commit("addCart", cartList); //添加购物车的对象
+
+      this.$toast.success("加入购物车成功");
+
+      this.skuShow = false;
+    },
   },
 };
 </script>
@@ -170,7 +201,14 @@ export default {
 .box {
   width: 100%;
   background: #f0f0f0;
-
+#back{
+  padding: 0.3rem;
+  position: fixed;
+  top: .5rem;
+  left: .2rem;
+  border-radius: 50%;
+  background: #fff;
+}
   #banner {
     width: 100%;
     img {
