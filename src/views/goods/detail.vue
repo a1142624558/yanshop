@@ -30,7 +30,12 @@
     <!-- 底部商品的提交栏 -->
     <van-goods-action>
       <van-goods-action-icon icon="chat-o" text="客服" />
-      <van-goods-action-icon icon="cart-o" text="购物车" />
+      <van-goods-action-icon
+        icon="cart-o"
+        text="购物车"
+        @click="$router.push('/cart')"
+        :badge="this.$store.getters.totalNums"
+      />
       <van-goods-action-icon icon="shop-o" text="店铺" />
       <van-goods-action-button type="danger" text="立即购买" />
       <van-goods-action-button type="warning" text="加入购物车" @click="skuShow=!skuShow" />
@@ -40,7 +45,6 @@
     <!-- 返回按钮 -->
     <div id="back" @click="$router.go(-1)">
       <van-icon name="arrow-left" size="25"></van-icon>
-
     </div>
   </div>
 </template>
@@ -131,7 +135,9 @@ export default {
         collection_id: 2261, // 无规格商品 skuId 取 collection_id，否则取所选 sku 组合对应的 id
         none_sku: false, // 是否无规格商品
       },
-      goods: {},
+      goods: {
+        picture: "",
+      },
     };
   },
   components: {},
@@ -166,13 +172,16 @@ export default {
       }
       // 加入购物车的操作
       let cartList = this.$store.state.cartList;
-      let index = cartList.findIndex(item=>{
+      let index = cartList.findIndex((item) => {
         return item.id == this.gid;
       });
       if (index > -1) {
         // 购物车中存在当前商品
         cartList.map((item) => {
-          item.nums++;
+          //判断添加的商品当前商品是否一致
+          if (item.id == this.gid) {
+            item.nums++;
+          }
         });
       } else {
         // 购物车中不存在当前商品
@@ -182,9 +191,9 @@ export default {
         object.name = this.goodsInfo.name;
         object.price = this.goodsInfo.originalPrice;
         object.img = this.goods.picture;
-        object.nume = 1;
+        object.nums = 1;
         object.checked = true;
-        cartList.push(object)
+        cartList.push(object);
       }
 
       this.$store.commit("addCart", cartList); //添加购物车的对象
@@ -201,14 +210,14 @@ export default {
 .box {
   width: 100%;
   background: #f0f0f0;
-#back{
-  padding: 0.3rem;
-  position: fixed;
-  top: .5rem;
-  left: .2rem;
-  border-radius: 50%;
-  background: #fff;
-}
+  #back {
+    padding: 0.3rem;
+    position: fixed;
+    top: 0.5rem;
+    left: 0.2rem;
+    border-radius: 50%;
+    background: #fff;
+  }
   #banner {
     width: 100%;
     img {

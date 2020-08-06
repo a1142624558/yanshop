@@ -50,6 +50,11 @@ export default {
     p:nth-of-type(1){
         line-height: .88rem;
         font-size: 0.25rem;
+        text-indent: 0;
+    }
+    p{
+      line-height: .6rem;
+      text-indent: 2em;
     }
 }
 </style>

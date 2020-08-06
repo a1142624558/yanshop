@@ -55,7 +55,7 @@
     </div>
     <!-- 人气推荐 -->
     <div class="recommand">
-      <div class="recommand-head">
+      <div class="recommand-head"  @click="$router.push('/article')">
         <span>人气推荐</span>
         <van-icon name="arrow" />
       </div>

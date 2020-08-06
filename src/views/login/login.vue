@@ -17,7 +17,16 @@ export default {
     return {
       mobile: "",
       pwd: "",
+
     };
+  },
+  beforeRouteEnter (to, from, next) {
+    let data = localStorage.getItem("09C");
+    if(data == null){
+        next();
+    }else{
+        next("/index");//返回首页
+    }
   },
   components: {},
   methods: {
