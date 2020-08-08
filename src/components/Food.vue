@@ -1,17 +1,17 @@
 <template>
-  <div class="hello">
-    
-  </div>
+    <div class="hello">
+        食品
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      
+    name: 'Food',
+    data () {
+        return {
+        
+        }
     }
-  }
 }
 </script>
 

@@ -1,17 +1,17 @@
 <template>
-  <div class="hello">
-    
-  </div>
+    <div class="hello">
+        母婴
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'HelloWorld',
-  data () {
-    return {
-      
+    name: 'Infant',
+    data () {
+        return {
+        
+        }
     }
-  }
 }
 </script>
 
