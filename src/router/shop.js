@@ -1,8 +1,9 @@
 import Home from "@/views/home/home.vue";
 import Search from "@/views/home/search.vue";
+import Goods from "@/views/home/goods.vue";
 export default [{
-    path: "/home",
-    name: "/home",
+    path: "/",
+    name: "/",
     component: Home,
   },
  
@@ -10,5 +11,10 @@ export default [{
     path: "/search",
     name: "/search",
     component: Search,
+  },
+  {
+    path: "/goods",
+    name: "/goods",
+    component: Goods,
   },
 ]
