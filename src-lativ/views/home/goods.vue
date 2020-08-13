@@ -20,10 +20,7 @@
       :goods="goods"
       :custom-stepper-config="customStepperConfig"
     >
-      <!-- <template #sku-stepper>
-        <van-stepper v-model="nums"/>
-      </template>-->
-    </van-sku>
+    </van-sku>                                                                                                                                                                                                                                             hbnn
   </div>
 </template>
 
